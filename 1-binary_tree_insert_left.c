@@ -9,26 +9,26 @@
  * Description - If parent already has a left-child, the new node must take its place, 
  * and the old left-child must be set as the left-child of the new node.
  *
- * Return: a pointer to the created node, or NULL on failure or if parent is NULL
+ * Return: pointer to the created node, or NULL on failure or if parent is NULL
  */
 
 binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value)
 {
-	binary_tree_t *new_left_node;
+	binary_tree_t *new;
 
 	if (!parent)
 		return (NULL);
 
-	new_left_node = malloc(sizeof(binary_tree_t));
-	if (!new_left_node)
+	new = malloc(sizeof(binary_tree_t));
+	if (!new)
 		return (NULL);
 
-	new_left_node->n = value;
-	new_left_node->parent = parent;
-	new_left_node->right = NULL;
-	new_left_node->left = parent->left;
-	parent->left = new_left_node;
-	if (new_left_node->left)
-		new_left_node->left->parent = new_left_node;
-	return (new_left_node);
+	new->n = value;
+	new->parent = parent;
+	new->right = NULL;
+	new->left = parent->left;
+	parent->left = new;
+	if (new->left)
+		new->left->parent = new;
+	return (new);
 }
